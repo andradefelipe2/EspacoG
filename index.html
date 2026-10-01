@@ -20,13 +20,23 @@ a{color:inherit}
 .wrap{max-width:860px;margin:0 auto;padding:0 20px}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
 header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo img{width:48px;height:47px;border-radius:12px;display:block;box-shadow:0 0 0 1px var(--line),0 0 0 4px var(--card),0 0 0 5px var(--line),0 6px 16px -6px rgba(138,85,87,.45);object-fit:cover}
+.logo img{width:48px;height:47px;border-radius:12px;display:block;object-fit:cover;box-shadow:0 0 0 1px var(--line),0 0 0 4px var(--card),0 0 0 5px var(--line),0 6px 16px -6px rgba(138,85,87,.45)}
 nav{display:flex;gap:18px;align-items:center;font-size:15px}
 nav a{text-decoration:none;color:var(--mut)}
 #tema{background:none;border:1px solid var(--line);color:var(--ink);border-radius:20px;padding:5px 12px;font:inherit;font-size:14px;cursor:pointer}
 @media(max-width:560px){nav .l{display:none}}
+
 .hero{padding:56px 0 44px}
-h1{font:600 clamp(40px,9vw,76px)/1.02 "Cormorant Garamond",serif;margin:0 0 16px}
+.hero-grid{display:grid;gap:36px;align-items:center;grid-template-columns:1.25fr 1fr}
+.hero-art{display:flex;justify-content:center}
+.hero-art svg{width:100%;max-width:300px;height:auto;display:block;overflow:visible;
+  filter:drop-shadow(0 24px 42px rgba(138,85,87,.22))}
+@media(max-width:720px){
+  .hero-grid{grid-template-columns:1fr;gap:14px}
+  .hero-art{order:-1;max-width:230px;margin:0 auto}
+}
+
+h1{font:600 clamp(38px,8.5vw,72px)/1.02 "Cormorant Garamond",serif;margin:0 0 16px}
 h1 em{font-style:italic;color:var(--rose);font-weight:500}
 .lead{max-width:33em;color:var(--mut);font-size:19px;margin:0}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
@@ -56,31 +66,47 @@ h2{font:600 clamp(30px,5vw,42px)/1.1 "Cormorant Garamond",serif;margin:0 0 8px}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .mapa iframe{filter:invert(.92) hue-rotate(180deg) grayscale(.25)}}
 :root[data-theme="dark"] .mapa iframe{filter:invert(.92) hue-rotate(180deg) grayscale(.25)}
 
-/* -------- Animação do perfil feminino -------- */
-.arte-wrap{display:flex;justify-content:center;margin:0 0 28px}
-.arte{width:min(320px,72vw);height:auto;display:block;overflow:visible;
-  filter:drop-shadow(0 18px 30px rgba(138,85,87,.18));
-  animation:flutua 7s ease-in-out infinite}
-@keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.arte .line{fill:none;stroke:url(#gradArte);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+/* --------- Animação da mulher em perfil --------- */
+.hero-art svg{animation:flutua 9s ease-in-out infinite}
+@keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+.hair-fill{opacity:0;animation:aparece 1.4s .15s ease-out forwards}
+@keyframes aparece{to{opacity:1}}
+
+.hair-line{fill:none;stroke:url(#gradLine);stroke-width:1.7;stroke-linecap:round;
+  stroke-dasharray:1;stroke-dashoffset:1;opacity:.75;
+  animation:desenha 1.7s ease-out forwards}
+.hair-line.l1{animation-delay:.75s}
+.hair-line.l2{animation-delay:.95s}
+.hair-line.l3{animation-delay:1.15s}
+
+.face{fill:none;stroke:url(#gradLine);stroke-width:2.9;stroke-linecap:round;stroke-linejoin:round;
   stroke-dasharray:1;stroke-dashoffset:1;
-  animation:desenha 1.9s cubic-bezier(.65,0,.35,1) forwards}
-.arte .hair1{animation-delay:.22s}
-.arte .hair2{animation-delay:.4s}
-.arte .hair3{animation-delay:.58s}
-.arte .hair4{animation-delay:.74s}
-.arte .neck{animation-delay:.9s}
+  animation:desenha 2s 1.35s cubic-bezier(.65,0,.35,1) forwards}
+
+.feature{fill:none;stroke:url(#gradLine);stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1;stroke-dashoffset:1;animation:desenha 1s ease-out forwards}
+.brow{animation-delay:2.35s}
+.eye{animation-delay:2.55s}
+.lashes{animation-delay:2.75s;stroke-width:1.8}
+
+.neck{fill:none;stroke:url(#gradLine);stroke-width:2.2;stroke-linecap:round;
+  stroke-dasharray:1;stroke-dashoffset:1;animation:desenha 1.2s 3.1s ease-out forwards}
+
 @keyframes desenha{to{stroke-dashoffset:0}}
-.arte .spark{fill:var(--gold);opacity:0;transform-box:fill-box;transform-origin:center;
-  animation:cintila 3.6s ease-in-out infinite}
-.arte .spark.rosa{fill:var(--rose)}
-@keyframes cintila{0%,100%{opacity:0;transform:scale(.4)}45%{opacity:.9;transform:scale(1)}}
+
+.spark{fill:var(--gold);opacity:0;transform-box:fill-box;transform-origin:center;
+  animation:cintila 4s 2.6s ease-in-out infinite}
+.spark.rosa{fill:var(--rose)}
+@keyframes cintila{0%,100%{opacity:0;transform:scale(.3)}40%{opacity:.9;transform:scale(1)}}
+
 @media(prefers-reduced-motion:reduce){
-  .arte{animation:none}
-  .arte .line{stroke-dashoffset:0;animation:none}
-  .arte .spark{opacity:.7;animation:none}
+  .hero-art svg{animation:none}
+  .hair-fill{opacity:1;animation:none}
+  .hair-line,.face,.feature,.neck{stroke-dashoffset:0;animation:none}
+  .spark{opacity:.7;animation:none}
 }
-/* ---------------------------------------------- */
+/* -------------------------------------------------- */
 
 footer{border-top:1px solid var(--line);padding:26px 0 100px;color:var(--mut);font-size:14px}
 .zap{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:6;background:#1f9d4d;border-radius:50%;width:58px;height:58px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.3)}
@@ -95,87 +121,112 @@ footer{border-top:1px solid var(--line);padding:26px 0 100px;color:var(--mut);fo
 </div></header>
 <main id="topo">
 <div class="wrap hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <h1>Depois que conhece o Espaço G, <em>não troca mais.</em></h1>
+      <p class="lead">Alongamento em fibra, naturais e duradouros. Também temos manicure, pedicure e depilação, em Osasco.</p>
+      <div class="cta">
+        <a class="btn" href="https://wa.me/5511941865515?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20no%20Espa%C3%A7o%20G." target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
+        <a class="btn o" href="https://www.instagram.com/espacog__/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
 
-  <div class="arte-wrap">
-    <svg class="arte" viewBox="0 0 400 460" role="img" aria-label="Ilustração de um perfil feminino estilizado">
-      <defs>
-        <linearGradient id="gradArte" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="var(--rose)"/>
-          <stop offset="100%" stop-color="var(--gold)"/>
-        </linearGradient>
-        <radialGradient id="glowArte" cx="50%" cy="45%" r="55%">
-          <stop offset="0%" stop-color="var(--rose)" stop-opacity=".22"/>
-          <stop offset="70%" stop-color="var(--rose)" stop-opacity=".06"/>
-          <stop offset="100%" stop-color="var(--rose)" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
+    <div class="hero-art">
+      <svg viewBox="0 0 340 520" role="img" aria-label="Ilustração de um perfil feminino elegante">
+        <defs>
+          <linearGradient id="gradHair" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%"  stop-color="var(--rose)" stop-opacity=".50"/>
+            <stop offset="55%" stop-color="var(--rose)" stop-opacity=".28"/>
+            <stop offset="100%" stop-color="var(--gold)" stop-opacity=".38"/>
+          </linearGradient>
+          <linearGradient id="gradLine" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%"  stop-color="var(--rose)"/>
+            <stop offset="100%" stop-color="var(--gold)"/>
+          </linearGradient>
+          <radialGradient id="glowArte" cx="58%" cy="38%" r="58%">
+            <stop offset="0%"  stop-color="var(--rose)" stop-opacity=".22"/>
+            <stop offset="70%" stop-color="var(--rose)" stop-opacity=".05"/>
+            <stop offset="100%" stop-color="var(--rose)" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
 
-      <circle cx="200" cy="220" r="190" fill="url(#glowArte)"/>
+        <circle cx="180" cy="220" r="180" fill="url(#glowArte)"/>
 
-      <!-- Perfil do rosto -->
-      <path class="line face pathLength" pathLength="1" d="
-        M 190 70
-        C 206 76, 216 94, 218 116
-        C 219 124, 221 130, 222 136
-        C 218 142, 215 146, 216 152
-        C 219 162, 229 170, 235 177
-        C 229 181, 224 184, 222 188
-        C 226 191, 229 194, 228 197
-        C 224 199, 221 199, 220 201
-        C 224 204, 228 207, 226 211
-        C 224 216, 222 219, 222 224
-        C 221 234, 213 243, 202 249
-        C 193 253, 188 259, 187 268
-        C 186 278, 186 288, 187 298"/>
+        <!-- Cabelo (silhueta preenchida) -->
+        <path class="hair-fill" fill="url(#gradHair)" d="
+          M 200 88
+          C 175 74, 140 78, 118 96
+          C 96 114, 86 142, 86 172
+          C 86 202, 96 228, 88 258
+          C 80 288, 78 318, 88 348
+          C 98 378, 96 408, 84 438
+          C 76 458, 78 478, 88 490
+          C 108 498, 128 488, 136 464
+          C 144 440, 148 416, 144 392
+          C 140 368, 150 344, 156 320
+          C 162 296, 156 272, 158 248
+          C 160 224, 164 200, 172 176
+          C 180 152, 190 120, 200 88 Z"/>
 
-      <!-- Cabelo - camada externa -->
-      <path class="line hair1" pathLength="1" d="
-        M 190 70
-        C 148 72, 112 98, 100 142
-        C 88 188, 90 240, 104 288
-        C 116 330, 130 358, 140 384"/>
+        <!-- Mechas detalhadas -->
+        <path class="hair-line l1" pathLength="1" d="
+          M 182 92 C 152 96, 128 118, 116 148 C 104 178, 104 210, 110 242"/>
+        <path class="hair-line l2" pathLength="1" d="
+          M 190 96 C 166 106, 148 132, 142 164 C 136 196, 138 228, 146 260"/>
+        <path class="hair-line l3" pathLength="1" d="
+          M 198 104 C 182 116, 170 140, 166 170 C 162 200, 166 230, 172 260"/>
 
-      <!-- Cabelo - mecha do meio -->
-      <path class="line hair2" pathLength="1" d="
-        M 200 84
-        C 166 92, 140 120, 130 160
-        C 120 200, 124 248, 138 292"/>
+        <!-- Pescoço e ombro -->
+        <path class="neck" pathLength="1" d="
+          M 184 320 C 182 342, 172 358, 150 372"/>
 
-      <!-- Cabelo - mecha interna -->
-      <path class="line hair3" pathLength="1" d="
-        M 208 100
-        C 182 112, 162 140, 156 174
-        C 150 208, 156 252, 166 290"/>
+        <!-- Perfil do rosto -->
+        <path class="face" pathLength="1" d="
+          M 200 88
+          C 210 96, 218 118, 217 138
+          C 217 143, 216 146, 214 149
+          C 212 152, 215 158, 218 166
+          C 222 176, 230 186, 236 194
+          C 238 197, 235 199, 230 200
+          C 226 201, 226 203, 226 206
+          C 226 209, 232 212, 234 214
+          C 233 216, 229 217, 226 218
+          C 228 221, 232 224, 232 226
+          C 231 228, 227 230, 224 232
+          C 222 236, 222 242, 222 248
+          C 222 258, 212 265, 200 268
+          C 192 271, 188 277, 188 282
+          C 188 292, 186 305, 184 320"/>
 
-      <!-- Cabelo - topo -->
-      <path class="line hair4" pathLength="1" d="
-        M 178 72
-        C 148 82, 126 104, 116 132"/>
+        <!-- Sobrancelha -->
+        <path class="feature brow" pathLength="1" d="
+          M 208 143 C 214 140, 221 141, 226 145"/>
 
-      <!-- Pescoço e ombro -->
-      <path class="line neck" pathLength="1" d="
-        M 187 298
-        C 178 322, 158 342, 128 356"/>
+        <!-- Olho (linha superior delicada) -->
+        <path class="feature eye" pathLength="1" d="
+          M 211 155 C 216 151, 223 151, 228 155"/>
 
-      <!-- Partículas cintilantes -->
-      <circle class="spark"    cx="252" cy="132" r="2.6" style="animation-delay:.6s"/>
-      <circle class="spark"    cx="118" cy="98"  r="2.2" style="animation-delay:1.4s"/>
-      <circle class="spark rosa" cx="276" cy="228" r="2.8" style="animation-delay:.9s"/>
-      <circle class="spark"    cx="92"  cy="252" r="2"   style="animation-delay:2s"/>
-      <circle class="spark rosa" cx="206" cy="346" r="2.4" style="animation-delay:1.2s"/>
-      <circle class="spark"    cx="308" cy="176" r="1.8" style="animation-delay:2.4s"/>
-      <circle class="spark"    cx="146" cy="376" r="2.2" style="animation-delay:.4s"/>
-      <circle class="spark rosa" cx="330" cy="292" r="2"   style="animation-delay:1.8s"/>
-    </svg>
-  </div>
+        <!-- Cílios -->
+        <path class="feature lashes" pathLength="1" d="
+          M 214 152 L 213 149
+          M 218 150 L 218 147
+          M 222 150 L 223 147
+          M 226 152 L 227 149"/>
 
-  <h1>Depois que conhece o Espaço G, <em>não troca mais.</em></h1>
-  <p class="lead">Alongamento em fibra, naturais e duradouros. Também temos manicure, pedicure e depilação, em Osasco.</p>
-  <div class="cta">
-    <a class="btn" href="https://wa.me/5511941865515?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20no%20Espa%C3%A7o%20G." target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
-    <a class="btn o" href="https://www.instagram.com/espacog__/" target="_blank" rel="noopener">Instagram</a>
+        <!-- Brilhos -->
+        <circle class="spark"      cx="248" cy="128" r="2.8" style="animation-delay:.2s"/>
+        <circle class="spark rosa" cx="104" cy="92"  r="2.4" style="animation-delay:1s"/>
+        <circle class="spark"      cx="286" cy="228" r="2.6" style="animation-delay:.6s"/>
+        <circle class="spark rosa" cx="70"  cy="200" r="2"   style="animation-delay:1.8s"/>
+        <circle class="spark"      cx="212" cy="402" r="2.4" style="animation-delay:1.4s"/>
+        <circle class="spark rosa" cx="308" cy="342" r="2.2" style="animation-delay:2.2s"/>
+        <circle class="spark"      cx="128" cy="420" r="2"   style="animation-delay:.8s"/>
+        <circle class="spark rosa" cx="58"  cy="350" r="2.4" style="animation-delay:2.6s"/>
+      </svg>
+    </div>
   </div>
 </div>
+
 <section id="valores"><div class="wrap">
 <h2>Tabela de valores</h2>
 <p class="sub">Escolha a categoria.</p>
