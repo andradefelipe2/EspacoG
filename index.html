@@ -20,13 +20,12 @@ a{color:inherit}
 .wrap{max-width:860px;margin:0 auto;padding:0 20px}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
 header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo img{width:48px;height:47px;border-radius:12px;display:block;box-shadow:0 0 0 1px var(--line),0 0 0 4px var(--card),0 0 0 5px var(--line),0 6px 16px -6px rgba(138,85,87,.45)}
+.logo img{width:48px;height:47px;border-radius:12px;display:block;box-shadow:0 0 0 1px var(--line),0 0 0 4px var(--card),0 0 0 5px var(--line),0 6px 16px -6px rgba(138,85,87,.45);object-fit:cover}
 nav{display:flex;gap:18px;align-items:center;font-size:15px}
 nav a{text-decoration:none;color:var(--mut)}
 #tema{background:none;border:1px solid var(--line);color:var(--ink);border-radius:20px;padding:5px 12px;font:inherit;font-size:14px;cursor:pointer}
 @media(max-width:560px){nav .l{display:none}}
 .hero{padding:56px 0 44px}
-.hero-logo{width:150px;height:146px;border-radius:20px;display:block;margin-bottom:34px;box-shadow:0 0 0 1px var(--line),0 0 0 9px var(--card),0 0 0 10px var(--line),0 22px 45px -14px rgba(138,85,87,.55),0 8px 20px -8px rgba(168,118,79,.45)}
 h1{font:600 clamp(40px,9vw,76px)/1.02 "Cormorant Garamond",serif;margin:0 0 16px}
 h1 em{font-style:italic;color:var(--rose);font-weight:500}
 .lead{max-width:33em;color:var(--mut);font-size:19px;margin:0}
@@ -56,6 +55,33 @@ h2{font:600 clamp(30px,5vw,42px)/1.1 "Cormorant Garamond",serif;margin:0 0 8px}
 .mapa-bar p{margin:0;color:var(--mut);font-size:15px}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .mapa iframe{filter:invert(.92) hue-rotate(180deg) grayscale(.25)}}
 :root[data-theme="dark"] .mapa iframe{filter:invert(.92) hue-rotate(180deg) grayscale(.25)}
+
+/* -------- Animação do perfil feminino -------- */
+.arte-wrap{display:flex;justify-content:center;margin:0 0 28px}
+.arte{width:min(320px,72vw);height:auto;display:block;overflow:visible;
+  filter:drop-shadow(0 18px 30px rgba(138,85,87,.18));
+  animation:flutua 7s ease-in-out infinite}
+@keyframes flutua{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.arte .line{fill:none;stroke:url(#gradArte);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1;stroke-dashoffset:1;
+  animation:desenha 1.9s cubic-bezier(.65,0,.35,1) forwards}
+.arte .hair1{animation-delay:.22s}
+.arte .hair2{animation-delay:.4s}
+.arte .hair3{animation-delay:.58s}
+.arte .hair4{animation-delay:.74s}
+.arte .neck{animation-delay:.9s}
+@keyframes desenha{to{stroke-dashoffset:0}}
+.arte .spark{fill:var(--gold);opacity:0;transform-box:fill-box;transform-origin:center;
+  animation:cintila 3.6s ease-in-out infinite}
+.arte .spark.rosa{fill:var(--rose)}
+@keyframes cintila{0%,100%{opacity:0;transform:scale(.4)}45%{opacity:.9;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){
+  .arte{animation:none}
+  .arte .line{stroke-dashoffset:0;animation:none}
+  .arte .spark{opacity:.7;animation:none}
+}
+/* ---------------------------------------------- */
+
 footer{border-top:1px solid var(--line);padding:26px 0 100px;color:var(--mut);font-size:14px}
 .zap{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:6;background:#1f9d4d;border-radius:50%;width:58px;height:58px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.3)}
 .zap svg{width:32px;height:32px;fill:#fff}
@@ -69,13 +95,86 @@ footer{border-top:1px solid var(--line);padding:26px 0 100px;color:var(--mut);fo
 </div></header>
 <main id="topo">
 <div class="wrap hero">
-<img class="hero-logo" src="https://raw.githubusercontent.com/andradefelipe2/EspacoG/main/logotype.jpg" alt="Logo do Espaço G">
-<h1>Depois que conhece o Espaço G, <em>não troca mais.</em></h1>
-<p class="lead">Alongamento em fibra, naturais e duradouros. Também temos manicure, pedicure e depilação, em Osasco.</p>
-<div class="cta">
-<a class="btn" href="https://wa.me/5511941865515?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20no%20Espa%C3%A7o%20G." target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
-<a class="btn o" href="https://www.instagram.com/espacog__/" target="_blank" rel="noopener">Instagram</a>
-</div>
+
+  <div class="arte-wrap">
+    <svg class="arte" viewBox="0 0 400 460" role="img" aria-label="Ilustração de um perfil feminino estilizado">
+      <defs>
+        <linearGradient id="gradArte" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="var(--rose)"/>
+          <stop offset="100%" stop-color="var(--gold)"/>
+        </linearGradient>
+        <radialGradient id="glowArte" cx="50%" cy="45%" r="55%">
+          <stop offset="0%" stop-color="var(--rose)" stop-opacity=".22"/>
+          <stop offset="70%" stop-color="var(--rose)" stop-opacity=".06"/>
+          <stop offset="100%" stop-color="var(--rose)" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <circle cx="200" cy="220" r="190" fill="url(#glowArte)"/>
+
+      <!-- Perfil do rosto -->
+      <path class="line face pathLength" pathLength="1" d="
+        M 190 70
+        C 206 76, 216 94, 218 116
+        C 219 124, 221 130, 222 136
+        C 218 142, 215 146, 216 152
+        C 219 162, 229 170, 235 177
+        C 229 181, 224 184, 222 188
+        C 226 191, 229 194, 228 197
+        C 224 199, 221 199, 220 201
+        C 224 204, 228 207, 226 211
+        C 224 216, 222 219, 222 224
+        C 221 234, 213 243, 202 249
+        C 193 253, 188 259, 187 268
+        C 186 278, 186 288, 187 298"/>
+
+      <!-- Cabelo - camada externa -->
+      <path class="line hair1" pathLength="1" d="
+        M 190 70
+        C 148 72, 112 98, 100 142
+        C 88 188, 90 240, 104 288
+        C 116 330, 130 358, 140 384"/>
+
+      <!-- Cabelo - mecha do meio -->
+      <path class="line hair2" pathLength="1" d="
+        M 200 84
+        C 166 92, 140 120, 130 160
+        C 120 200, 124 248, 138 292"/>
+
+      <!-- Cabelo - mecha interna -->
+      <path class="line hair3" pathLength="1" d="
+        M 208 100
+        C 182 112, 162 140, 156 174
+        C 150 208, 156 252, 166 290"/>
+
+      <!-- Cabelo - topo -->
+      <path class="line hair4" pathLength="1" d="
+        M 178 72
+        C 148 82, 126 104, 116 132"/>
+
+      <!-- Pescoço e ombro -->
+      <path class="line neck" pathLength="1" d="
+        M 187 298
+        C 178 322, 158 342, 128 356"/>
+
+      <!-- Partículas cintilantes -->
+      <circle class="spark"    cx="252" cy="132" r="2.6" style="animation-delay:.6s"/>
+      <circle class="spark"    cx="118" cy="98"  r="2.2" style="animation-delay:1.4s"/>
+      <circle class="spark rosa" cx="276" cy="228" r="2.8" style="animation-delay:.9s"/>
+      <circle class="spark"    cx="92"  cy="252" r="2"   style="animation-delay:2s"/>
+      <circle class="spark rosa" cx="206" cy="346" r="2.4" style="animation-delay:1.2s"/>
+      <circle class="spark"    cx="308" cy="176" r="1.8" style="animation-delay:2.4s"/>
+      <circle class="spark"    cx="146" cy="376" r="2.2" style="animation-delay:.4s"/>
+      <circle class="spark rosa" cx="330" cy="292" r="2"   style="animation-delay:1.8s"/>
+    </svg>
+  </div>
+
+  <h1>Depois que conhece o Espaço G, <em>não troca mais.</em></h1>
+  <p class="lead">Alongamento em fibra, naturais e duradouros. Também temos manicure, pedicure e depilação, em Osasco.</p>
+  <div class="cta">
+    <a class="btn" href="https://wa.me/5511941865515?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20no%20Espa%C3%A7o%20G." target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
+    <a class="btn o" href="https://www.instagram.com/espacog__/" target="_blank" rel="noopener">Instagram</a>
+  </div>
 </div>
 <section id="valores"><div class="wrap">
 <h2>Tabela de valores</h2>
